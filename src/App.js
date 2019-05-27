@@ -113,7 +113,7 @@ class App extends Component {
                       <Route exact path={'/'}
                              render={(props) =>
                               <React.Fragment>
-
+                                  <h1>Det virker PT.</h1>
                               </React.Fragment>}
                       />
                   </Switch>
