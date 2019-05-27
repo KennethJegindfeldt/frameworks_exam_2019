@@ -108,12 +108,12 @@ class App extends Component {
   render() {
       return (
           <Router>
-              <div className="container"></div>
+              <div className="container">
                   <Switch>
                       <Route exact path={'/'}
                              render={(props) =>
                               <React.Fragment>
-                                  <h1>Det virker PT.</h1>
+                                  <h1>Det virker</h1>
                               </React.Fragment>}
                       />
                   </Switch>
