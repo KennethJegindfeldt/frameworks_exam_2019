@@ -108,7 +108,7 @@ class App extends Component {
   render() {
       return (
           <Router>
-              <div className="container">
+              <div className="container"></div>
                   <Switch>
                       <Route exact path={'/'}
                              render={(props) =>
