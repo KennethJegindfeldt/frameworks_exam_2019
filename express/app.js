@@ -15,7 +15,7 @@ var mongoose = require('mongoose');
 
 
 // Online DB// Local DB
-mongoose.connect('mongodb+srv://admin:kenneth1992@cluster0-f3idh.mongodb.net/Mandatory?retryWrites=true');
+mongoose.connect('mongodb+srv://admin:kenneth1992@cluster0-f3idh.mongodb.net/Eksamen19?retryWrites=true');
 
 
 /****** socket.io *****/
@@ -29,7 +29,7 @@ io.of('/my_app').on('connection', function (socket){
     socket.on('hello', function (from, msg) {
         console.log(`I received a private message from '${from}' saying '${msg}'`);
     });
-    socket.on('disconnect', () => {
+    socket.on('Disconnect', () => {
         console.log("Someone disconnected");
     });
 });
