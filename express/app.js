@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 
 
 /****** Configuration *****/
-const port = (process.env.PORT || 8081);
+const port = (process.env.PORT || 9090);
 app.use(express.static(path.join(__dirname, '../build')));
 
 /****** Database *****/
