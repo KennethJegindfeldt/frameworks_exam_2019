@@ -1,5 +1,5 @@
-import React from 'react';
 import React, {Component} from 'react';
+import io from 'socket.io-client'; 
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import './App.css';
 
@@ -113,25 +113,9 @@ class App extends Component {
                       <Route exact path={'/'}
                              render={(props) =>
                               <React.Fragment>
-                              <NewQuestion {...props} addQuestion={this.addQuestion}></NewQuestion>
-                                 <QuestionList {...props}
-                                       qas={this.state.qas}/>
+
                               </React.Fragment>}
                       />
-
-                      <Route exact path={'/question/:id'}
-                             render={(props) =>
-                                 <Question {...props}
-                             questions={this.getQuestionFromId(props.match.params.id) } addAnswers={this.addAnswers}   answers={this.getAnswersFromId(props.match.params.id)} />
-
-                             }
-                      />
-
-                      <Route exact path={'/NewAnswers'}
-                             render={(props) =>
-                                 <NewAnswers {...props}  addAnswers={this.addAnswers}   answers={this.getAnswersFromId(props.match.params.id)} ></NewAnswers>}/>
-
-                      <Route component={NotFound} />
                   </Switch>
 
               </div>
