@@ -1,13 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');     // Log all HTTP requests to the console
+require('dotenv').config()
 const path = require('path');
-const morgan = require('morgan');           // Log all HTTP requests to the console
+const app = express();
 const checkJwt = require('express-jwt');    // Check for access tokens automatically
 const bcrypt = require('bcrypt');           // Used for hashing passwords!
-require('dotenv').config();
-const app = express();
-app.use(bodyParser.json());
+var mongoose = require('mongoose')
 app.use(express.static(path.join(__dirname, '../build')));
+
+/****** Configuration *****/
+app.use(bodyParser.json());                 // Make sure all json data is parsed
+app.use(morgan('combined'));         // Log all requests to the console
 
 
 

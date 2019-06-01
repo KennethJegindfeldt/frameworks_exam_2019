@@ -1,7 +1,7 @@
 {
   "name": "cooking_recipe_api",
   "version": "1.0.0",
-  "description": "Small template for developing an express.js/angular 2+ application",
+  "description": "Eksamens Projekt med MERN Stack - Summer// 2019",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,9 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.11",
     "morgan": "^1.9.1",
     "socket.io": "^2.2.0"
