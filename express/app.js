@@ -1,24 +1,58 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const morgan = require('morgan');           // Log all HTTP requests to the console
+const checkJwt = require('express-jwt');    // Check for access tokens automatically
+const bcrypt = require('bcrypt');           // Used for hashing passwords!
 require('dotenv').config();
 const app = express();
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../build')));
+
+
 
 
 /****** Configuration *****/
 const port = (process.env.PORT || 9090);
-app.use(express.static(path.join(__dirname, '../build')));
+console.log(process.env.JWT_SECRET)
+if (!process.env.JWT_SECRET) {
+    console.error('You need to put a secret in the JWT_SECRET env variable!');
+    process.exit(1);
+}
+
+app.use(morgan('combined')); // Log all requests to the console
+
 
 /****** Database *****/
 var mongoose = require('mongoose');
 
 
 // Online DB// Local DB
-mongoose.connect('mongodb+srv://admin:kenneth1992@cluster0-f3idh.mongodb.net/Eksamen19?retryWrites=true');
+mongoose.connect(process.env.dbUrl, (err) => {
+    console.log('MongoDB Connection Status: ', err)
+})
+
+//mongoose.connect('mongodb+srv://admin:kenneth1992@cluster0-f3idh.mongodb.net/Eksamen19?retryWrites=true');
+
+// Open Paths - Har ikke brug for login for at tilgå dem
+let openPaths = [
+    '/api/users/authenticate',
+    '/api/users/create',
+];
+
+/****** Validate the user using authentication ******/
+app.use(
+    checkJwt({ secret: process.env.JWT_SECRET }).unless({ path : openPaths})
+);
+app.use((err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+        res.status(401).json({ error: err.message });
+    }
+});
 
 
-/****** socket.io *****/
+
+/****** Socket.IO ******/
 
 const server = app.listen(port,
     () => console.log(`Some app running on port ${port}`));
@@ -55,7 +89,7 @@ app.use((req, res, next) => {
 
 
 
-/****** Schema - Database *****/
+/****** Schemas - Database *****/
 
 var answerSchema = new mongoose.Schema({
     answers: String,
@@ -201,7 +235,17 @@ app.get('/api/data/:id', (req, res) => {
 
 });
 
-/**** Reroute all unknown requests to the React index.html ****/
+
+/******  User Router ******/
+let usersRouter = require('./users_router')(users);
+app.use('/api/users', usersRouter);
+
+/****** Error handling ******/
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send({msg: 'Something broke!'})
+});
+
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
 });

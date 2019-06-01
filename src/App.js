@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
-import io from 'socket.io-client'; 
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import io from 'socket.io-client'; 
 import './App.css';
+import Login from './Login'
+import AuthService from './AuthService';
+
 
 
 
@@ -9,20 +12,24 @@ import './App.css';
 class App extends Component {
 
   api_url = process.env.REACT_APP_API_URL;
-
+  
   constructor(props) {
       super(props);
+      
+      this.Auth = new AuthService(`${this.api_url}/users/authenticate`);
 
       // TODO: Move this data to the server
       this.state = {
-          qas: [
-          ],
+          qas: [],
+          loggedIn: false
 
       };
 
-      this.addQuestion = this.addQuestion.bind(this);
-      this.addAnswers = this.addAnswers.bind(this);
+      this.handleLogout = this.handleLogout.bind(this)
+      this.getData = this.getData.bind(this);
 
+      this.addQuestion = this.addQuestion.bind(this);
+      this.addAnswers = this.addAnswers.bind(this);    
   }
 
 
@@ -34,7 +41,7 @@ class App extends Component {
 
       socket.on('connect',() => {
           console.log("Connected to Socket.IO");
-          socket.emit('Hello', "Hey" , "Dav");
+          socket.emit('Hey', "Way" , "Delay");
       });
 
       socket.on('new-data', (questions) => {
@@ -104,8 +111,18 @@ class App extends Component {
       return this.state.qas.find((elm) => elm._id === id);
   }
 
+// Logout
+  handleLogout(event) {
+    this.Auth.logout()
+}
 
   render() {
+
+    if (localStorage.getItem("token") === "undefined") {
+        return( <Login/>  )               
+    
+    }
+
       return (
           <Router>
               <div className="container">
@@ -113,7 +130,7 @@ class App extends Component {
                       <Route exact path={'/'}
                              render={(props) =>
                               <React.Fragment>
-                                  <h1>Det virker</h1>
+                                  <h1>Du er nu logget ind</h1>
                               </React.Fragment>}
                       />
                   </Switch>
