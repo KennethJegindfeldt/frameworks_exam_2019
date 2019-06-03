@@ -39,6 +39,7 @@ mongoose.connect(process.env.dbUrl, (err) => {
 let openPaths = [
     '/api/users/authenticate',
     '/api/users/create',
+    '/api/jobs'
 ];
 
 /****** Validate the user using authentication ******/

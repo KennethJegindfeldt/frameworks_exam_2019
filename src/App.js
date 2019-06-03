@@ -6,6 +6,7 @@ import Login from './Login'
 import AuthService from './AuthService';
 import NotFound from './NotFound';
 import NewJob from './NewJob';
+import Job from './Job';
 import JobList from './JobList';
 
 
@@ -42,8 +43,8 @@ class App extends Component {
           socket.emit('Hej', "Med" , "Dig");
       });
 
-      socket.on('new-data', (questions) => {
-          console.log(`server msg: ${questions.msg}`);
+      socket.on('new-data', (jobs) => {
+          console.log(`server msg: ${jobs.msg}`);
           this.getData();
       });
       this.getData();
@@ -95,10 +96,13 @@ addJob(jobtitle, category, area, description) {
       return (
          <Router>
               <div className="container">
-                <h1>Du er nu logget ind</h1>
-                <form>
-                    <button type="submit" onClick={this.handleLogout}>Log ud</button>
-                </form>
+                    <div class="div-header">
+                        <h3>Du er nu logget ind</h3>   
+                        <form>
+                            <button type="submit" onClick={this.handleLogout}>Log ud</button>
+                        </form>        
+                    </div>
+              
                 <Switch>
                 <Route exact path={'/'}
                                render={(props) =>
@@ -107,6 +111,14 @@ addJob(jobtitle, category, area, description) {
                                    <JobList {...props}
                                          qas={this.state.qas}/>
                                 </React.Fragment>}
+                        />
+
+                <Route exact path={'/jobs/:id'}
+                               render={(props) =>
+                                   <Job {...props}
+                               jobs={this.getJobFromId(props.match.params.id) }  />
+
+                               }
                         />
 
                     <Route component={NotFound} />

@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  font-family: -apple-system, BlinkMacSystemFont, "Arial", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -10,4 +10,29 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+
+
+/*----------------- Custom - CSS -----------------*/
+
+.div-header { 
+background-color: #b41018;
+height: 75px;
+padding: 2% 0;
+}
+
+.div-header h3 { 
+  color:white;
+  text-align: center;
+}
+
+
+.job-div {
+  width:100%;
+  background: beige;
+  padding: 1% 3%;
+}
+.job-div h2 {
+  color:#003269;
 }

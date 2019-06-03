@@ -13,10 +13,12 @@ class NewJob extends Component {
         };
 
         this.onChange = this.onChange.bind(this);
+
         this.onChangeJobTitle = this.onChangeJobTitle.bind(this);
         this.onChangeCategory = this.onChangeCategory.bind(this);
         this.onChangeArea = this.onChangeArea.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
+        
         this.handleInput = this.handleInput.bind(this);
     }
 
@@ -28,7 +30,7 @@ class NewJob extends Component {
 
     onChangeJobTitle(event) {
         this.setState({
-            name: event.target.value
+            jobtitle: event.target.value
         });
     }
 
