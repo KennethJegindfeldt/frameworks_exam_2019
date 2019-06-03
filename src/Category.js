@@ -2,16 +2,16 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 
 
-class Job extends Component {
+class Category extends Component {
 
    
     render() {
-        let job = this.props.jobs;
+        let category = this.props.categories;
         
         console.log(this.props)
-        if(!job) return (
+        if(!category) return (
         <div>
-            Indlæser jobs ...
+            Indlæser Job kategorier ...
         </div>)
      
 
@@ -19,10 +19,7 @@ class Job extends Component {
         return (
             <div>
             <div class="job-div">
-                <h3>{job.jobtitle}</h3>
-                <p>{job.category}</p>
-                <p>{job.area}</p>
-                <p>{job.description}</p>
+                <h3>{category.category}</h3>
                 <b><Link to={'/'}>Gå til forsiden</Link></b>
             </div>          
             </div>
@@ -30,5 +27,5 @@ class Job extends Component {
     }
 }
 
-export default Job;
+export default Category;
 

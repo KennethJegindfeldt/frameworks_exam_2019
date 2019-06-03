@@ -39,7 +39,9 @@ mongoose.connect(process.env.dbUrl, (err) => {
 let openPaths = [
     '/api/users/authenticate',
     '/api/users/create',
-    '/api/jobs'
+    '/api/jobs',
+    '/api/newArea',
+    '/api/newCategory'
 ];
 
 /****** Validate the user using authentication ******/
@@ -101,13 +103,23 @@ app.use((req, res, next) => {
 
 /****** Schemas - Database *****/
 
+var areaSchema = new mongoose.Schema ({
+    area: String
+})
+
+var categorySchema = new mongoose.Schema ({
+    category: String
+})
+
 var jobSchema = new mongoose.Schema ({
     jobtitle: String,
-    category: String,
-    area: String,
+    jobcategory: String,
+    jobarea: String,
     description: String
 })
 
+var areas = mongoose.model('area', areaSchema);
+var categories = mongoose.model('category', categorySchema);
 var jobs = mongoose.model('jobs', jobSchema);
 
 
@@ -126,13 +138,59 @@ app.post('/api/NewJob', (req, res, next) => {
     })
 })
 
+// -------- ADD Job Category
+app.post('/api/NewCategory', (req, res, next) => {
+    var NewCategory = new categories(req.body)
+    NewCategory.save(function (err, NewCategory) {
+
+        io.of('/api/my_app').emit('new-data', {
+            msg: 'New data is available on /api/my_data'
+        });
+
+        if (err) { return next(err) }
+        res.json(201, NewCategory);
+        console.log("En ny category er tilføjet");
+    })
+})
+
+// -------- ADD Job Area
+app.post('/api/NewArea', (req, res, next) => {
+    var NewArea = new areas(req.body)
+    NewArea.save(function (err, NewArea) {
+
+        io.of('/api/my_app').emit('new-data', {
+            msg: 'New data is available on /api/my_data'
+        });
+
+        if (err) { return next(err) }
+        res.json(201, NewArea);
+        console.log("Et nyt jobområde er tilføjet");
+    })
+})
+
+
 
 
 /****** Routes *****/
 
+// Jobs
 app.get("/api/jobs", (req, res) => {
     jobs.find({}, (err, jobs) => {
         res.send(jobs)
+    })
+})
+
+//Categories
+app.get("/api/category", (req, res) => {
+    categories.find({}, (err, categories) => {
+        res.send(categories)
+    })
+})
+
+//Areas
+app.get("/api/areas", (req, res) => {
+    areas.find({}, (err, areas) => {
+        res.send(areas)
     })
 })
 

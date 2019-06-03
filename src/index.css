@@ -33,6 +33,34 @@ padding: 2% 0;
   background: beige;
   padding: 1% 3%;
 }
-.job-div h2 {
+
+.job-div-list {
+  background: beige;
+}
+
+.job-div h3 {
   color:#003269;
+}
+
+.job-div-list h3 {
+  color:#003269;
+}
+
+
+.logout {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  width: 200px;
+  height: 50px;
+  position: absolute;
+  top:0;
+  right:0;
+  color: #fff;
+  background-color: #eb8518;
+  border:none;
+}
+
+.logout:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
 }

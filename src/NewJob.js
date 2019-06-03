@@ -64,19 +64,19 @@ class NewJob extends Component {
                 <form>
                     <label>Jobtitel</label>
                     <br />
-                    <input type="text" onChange={this.onChangeJobTitle} className="form-control" id="jobtitle" placeholder="Jobtitel"></input>
+                    <input type="text" onChange={this.onChangeJobTitle} className="form-control" id="jobtitle" placeholder="Jobtitel" required></input>
                     <br />
                     <label>Job kategori</label>
                     <br />
-                    <input type="text" onChange={this.onChangeCategory} className="form-control" id="category" placeholder="Job kategori"></input>
+                    <input type="text" onChange={this.onChangeCategory} className="form-control" id="category" placeholder="Job kategori" required></input>
                     <br />
                     <label>Geografi</label>
                     <br />
-                    <input type="text" onChange={this.onChangeArea} className="form-control" id="area" placeholder="Område"></input>
+                    <input type="text" onChange={this.onChangeArea} className="form-control" id="area" placeholder="Område" required></input>
                     <br />
                     <label>Job beskrivelse</label>
                     <br />
-                    <textarea onChange={this.onChangeDescription} className="form-control" id="description" placeholder="Job beskrivelse"></textarea> 
+                    <textarea onChange={this.onChangeDescription} className="form-control" id="description" placeholder="Job beskrivelse" required></textarea> 
 
                     <button onClick={this.handleInput}
                             type="submit" id="submitButton"> Tilføj et job

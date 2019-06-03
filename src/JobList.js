@@ -8,7 +8,7 @@ class JobList extends Component {
 
         this.props.qas.forEach((elm) => {
             jobList.push(
-                <div class="front-question-box">
+                <div class="job-div">
                     <li key={elm._id}>
                         <h3>{elm.jobtitle}</h3>
                         <p>{elm.category}</p>
@@ -20,7 +20,7 @@ class JobList extends Component {
         });
 
         return (
-            <div>
+            <div class="job-div-list">
                 <h3>{this.props.header}</h3>
                 <ul>
                     {jobList}

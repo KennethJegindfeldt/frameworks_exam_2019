@@ -9,6 +9,10 @@ import NewJob from './NewJob';
 import Job from './Job';
 import JobList from './JobList';
 
+import Category from './Category';
+import Area from './Area';
+
+
 
 class App extends Component {
 
@@ -22,13 +26,16 @@ class App extends Component {
       // TODO: Move this data to the server
       this.state = {
           qas: [],
-          loggedIn: false
+          loggedIn: false,
+          username: ""
       };
 
       this.handleLogout = this.handleLogout.bind(this)
       this.getData = this.getData.bind(this);
 
       this.addJob= this.addJob.bind(this);
+      this.addCategory= this.addCategory.bind(this);
+      this.addArea= this.addArea.bind(this);
   }
 
 
@@ -57,13 +64,13 @@ class App extends Component {
         .catch(err => console.error(err))
 }
 
-addJob(jobtitle, category, area, description) {
+addJob(jobtitle, jobcategory, jobarea, description) {
     this.Auth.fetch(`${this.api_url}/NewJob`, {
         method: 'POST',
         body: JSON.stringify({
             jobtitle: jobtitle,
-            category: category,
-            area: area,
+            jobcategory: jobcategory,
+            jobarea: jobarea,
             description: description
         }),
     })
@@ -74,22 +81,57 @@ addJob(jobtitle, category, area, description) {
 }
 
 
+addArea(area) {
+    this.Auth.fetch(`${this.api_url}/NewArea`, {
+        method: 'POST',
+        body: JSON.stringify({
+            area: area,
+        }),
+    })
+        .then(json => {
+            console.log("Result of posting a // Area");
+            console.log(json);
+        });
+}
 
-  // GET QUESTION FROM ID
+
+addCategory(category) {
+    this.Auth.fetch(`${this.api_url}/NewCategory`, {
+        method: 'POST',
+        body: JSON.stringify({
+            category: category,
+        }),
+    })
+        .then(json => {
+            console.log("Result of posting a // Area");
+            console.log(json);
+        });
+}
+
+
+
+  // GET JOB FROM ID
   getJobFromId(id) {
       console.log()
       return this.state.qas.find((elm) => elm._id === id);
   }
+
 
 // Logout
   handleLogout(event) {
     this.Auth.logout()
 }
 
+setUsername(username){
+    this.setState({
+        username: username
+    })
+}
+
   render() {
 
     if (localStorage.getItem("token") === "undefined") {
-        return( <Login/>  )               
+        return( <Login setUsername={this.setUsername}/>  )               
     
     }
 
@@ -97,21 +139,22 @@ addJob(jobtitle, category, area, description) {
          <Router>
               <div className="container">
                     <div class="div-header">
-                        <h3>Du er nu logget ind</h3>   
+                        <h3>Du er nu logget ind: {this.state.username}</h3>   
                         <form>
-                            <button type="submit" onClick={this.handleLogout}>Log ud</button>
+                            <button type="submit" class="logout" onClick={this.handleLogout}>Log ud</button>
                         </form>        
                     </div>
               
                 <Switch>
+
                 <Route exact path={'/'}
                                render={(props) =>
                                 <React.Fragment>
-                                <NewJob {...props} addJob={this.addJob}></NewJob>
                                    <JobList {...props}
                                          qas={this.state.qas}/>
                                 </React.Fragment>}
                         />
+
 
                 <Route exact path={'/jobs/:id'}
                                render={(props) =>
@@ -120,6 +163,7 @@ addJob(jobtitle, category, area, description) {
 
                                }
                         />
+                        
 
                     <Route component={NotFound} />
                 </Switch>
