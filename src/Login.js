@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AuthService from './AuthService';
 
 export default class Login extends Component {
-    api_url = process.env.REACT_APP_API_URL;
+    api_url = 'http://localhost:9090/api';
     constructor(props) {
         super(props)
 

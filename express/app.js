@@ -8,10 +8,7 @@ const checkJwt = require('express-jwt');    // Check for access tokens automatic
 const bcrypt = require('bcrypt');           // Used for hashing passwords!
 var mongoose = require('mongoose')
 app.use(express.static(path.join(__dirname, '../build')));
-
-/****** Configuration *****/
 app.use(bodyParser.json());                 // Make sure all json data is parsed
-app.use(morgan('combined'));         // Log all requests to the console
 
 
 
@@ -48,11 +45,19 @@ let openPaths = [
 app.use(
     checkJwt({ secret: process.env.JWT_SECRET }).unless({ path : openPaths})
 );
+
 app.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
         res.status(401).json({ error: err.message });
     }
 });
+
+
+const users = [
+    { id: 0, username: "bob", password: '1234'},
+    { id: 1, username: "ole", password: 'password'},,
+];
+
 
 
 
@@ -95,126 +100,43 @@ app.use((req, res, next) => {
 
 /****** Schemas - Database *****/
 
-var answerSchema = new mongoose.Schema({
-    answers: String,
-    votes: Number 
-});
+var jobSchema = new mongoose.Schema ({
+    jobtitle: String,
+    category: String,
+    area: String,
+    description: String
+})
 
-var qasSchema = new mongoose.Schema({
-    name: String,
-    questions: String,
-    answers: [answerSchema]
-});
+var jobs = mongoose.model('jobs', jobSchema);
 
 
-var answers = mongoose.model('answers', answerSchema);
-var questions = mongoose.model('questions', qasSchema);
-
-
-
-
-// -------- ADD NEW QUESTION
-app.post('/api/NewQuestion', (req, res, next) => {
-    var NewQuestion = new questions(req.body)
-    NewQuestion.save(function (err, NewQuestion) {
+// -------- ADD NEW JOB
+app.post('/api/NewJob', (req, res, next) => {
+    var NewJob = new jobs(req.body)
+    NewJob.save(function (err, NewJob) {
 
         io.of('/api/my_app').emit('new-data', {
             msg: 'New data is available on /api/my_data'
         });
 
         if (err) { return next(err) }
-        res.json(201, NewQuestion);
-        console.log("Et nyt question er tilføjet");
+        res.json(201, NewJob);
+        console.log("Et nyt job er tilføjet");
     })
 })
 
 
-// -------- GET ANSWERS BY ID
-app.post('/api/answers/:id', async (req, res) => {
-    console.log(req.body)
-    const answer = {answers:req.body.answers, votes:0};
-
-    console.log(answer)
-    const question = await questions.findOne(
-        { _id: req.params.id},
-        (err, docs) => {
-            console.log(docs)
-            docs.answers.push(answer)
-
-            io.of('/api/my_app').emit('new-data', {
-                msg: 'New data is available on /api/my_data'
-            });
-
-            docs.save()
-        }
-
-    )
-    console.log(question);
-    console.log(req.params.id)
-
-    if(question){
-        res.status(200);
-        res.send(question);
-    }
-    res.status(404);
-    res.send();
-
-});
-
-// -------- GET VOTE BY ID
-app.post('/api/votes/:id', async (req, res) => {
-    const {answerId, count} = req.body;
-
-    const question = await questions.findOne(
-        { _id: req.params.id},
-        (err, docs) => {
-
-
-
-            docs.answers.find((answer) => {
-                if (answerId == answer._id){
-                    answer.votes = count
-                }
-
-            })
-            
-            docs.save()
-        }
-
-    )
-    console.log(question);
-    console.log(req.params.id)
-
-    if(question){
-        res.status(200);
-        res.send(question);
-    }
-    res.status(404);
-    res.send();
-
-});
-
-
-
-
-// ------- GET QUESTIONS
-app.get("/api/questions", (req, res) => {
-    questions.find({}, (err, questions) => {
-        res.send(questions)
-    })
-})
-
-
-// ------- GET ANSWERS
-app.get("/api/answers", (req, res) => {
-    answers.find({}, (err, answers) => {
-        res.send(answers)
-    })
-})
 
 /****** Routes *****/
+
+app.get("/api/jobs", (req, res) => {
+    jobs.find({}, (err, jobs) => {
+        res.send(jobs)
+    })
+})
+
 app.get('/api/', (req, res) => {
-    questions.find(function (err, data) {
+    jobs.find(function (err, data) {
         if (err) return console.error(err);
         res.status(200).json(data)
 
@@ -224,13 +146,13 @@ app.get('/api/', (req, res) => {
 app.get('/api/data/:id', (req, res) => {
 
     const { id } = req.params;
-    const question = data.filter((data) => data.id == id)[0];
+    const jobs = data.filter((data) => data.id == id)[0];
 
-    if(!question) {
+    if(!jobs) {
         res.sendStatus(404);
     }
     else {
-        res.status(200).json(question);
+        res.status(200).json(jobs);
     }
 
     res.json({
