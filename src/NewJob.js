@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Login from './Login'
+import Select from "react-select";
 
 class NewJob extends Component {
 
@@ -7,9 +10,11 @@ class NewJob extends Component {
 
         this.state = {
             jobtitle: "",
-            category: "",
-            area: "",
-            description: this.props.answers,
+            jobcategory: [],
+            jobarea: [],
+            description: "",
+            company: "",
+            email: ""
         };
 
         this.onChange = this.onChange.bind(this);
@@ -18,8 +23,11 @@ class NewJob extends Component {
         this.onChangeCategory = this.onChangeCategory.bind(this);
         this.onChangeArea = this.onChangeArea.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
-        
+        this.onChangeCompany = this.onChangeCompany.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
         this.handleInput = this.handleInput.bind(this);
+
+        
     }
 
     onChange(event) {
@@ -36,13 +44,13 @@ class NewJob extends Component {
 
     onChangeCategory(event) {
         this.setState({
-            category: event.target.value
+            jobcategory: event.target.value
         });
     }
 
     onChangeArea(event) {
         this.setState({
-            area: event.target.value
+            jobarea: event.target.value
         });
     }
 
@@ -51,38 +59,90 @@ class NewJob extends Component {
             description: event.target.value
         });
     }
+
+    onChangeCompany(event) {
+        this.setState({
+            company: event.target.value
+        });
+    }
+
+    onChangeEmail(event) {
+        this.setState({
+            email: event.target.value
+        });
+    }
  
 
     handleInput(event) {
-        this.props.addJob(this.state.jobtitle, this.state.category, this.state.area, this.state.description);
+        this.props.addJob(this.state.jobtitle, this.state.jobcategory, this.state.jobarea, this.state.description, this.state.company, this.state.email);
     }
+
+    
 
 
     render() {
+
+        let cat = [];
+        this.props.cat.forEach( elm => {
+            cat.push(<option value={elm.category}>{elm.category}</option>)
+        })
+        console.log(this.props.cat)
+
+
+        let area = [];
+        this.props.area.forEach( elm => {
+            area.push(<option value={elm.area}>{elm.area}</option>)
+        })
+        console.log(this.props.area)
+
+        if (localStorage.getItem("token") === "undefined") {
+            return( <Login setUsername={this.setUsername}/>  
+                      
+                )               
+        
+        }
+
         return (
-            <div className="front-new-question-box">
+
+            
+
+            <div className="newjob-div">            
+            <h2>Tilføj et nyt jobopslag</h2>
                 <form>
                     <label>Jobtitel</label>
                     <br />
-                    <input type="text" onChange={this.onChangeJobTitle} className="form-control" id="jobtitle" placeholder="Jobtitel" required></input>
+                    <input type="text" onChange={this.onChangeJobTitle} className="form-control single-input" id="jobtitle" placeholder="Jobtitel" required></input>
                     <br />
-                    <label>Job kategori</label>
+                    <label>Kategori</label>
                     <br />
-                    <input type="text" onChange={this.onChangeCategory} className="form-control" id="category" placeholder="Job kategori" required></input>
+                    <select onChange={this.onChangeCategory}>
+                        {cat}
+                    </select>
+                    <br />  <br />
+                    <label>Virksomhed</label>
                     <br />
-                    <label>Geografi</label>
+                    <input type="text" onChange={this.onChangeCompany} className="form-control single-input" id="company" placeholder="Virksomhed" required></input>
                     <br />
-                    <input type="text" onChange={this.onChangeArea} className="form-control" id="area" placeholder="Område" required></input>
+                    <label>Kontakt</label>
                     <br />
+                    <input type="email" onChange={this.onChangeEmail} className="form-control single-input" id="email" placeholder="Email" required></input>
+                    <br />
+                    <label>Område</label>
+                    <br />  
+                    <select onChange={this.onChangeArea}>
+                        {area}
+                    </select>
+                    <br /><br />
                     <label>Job beskrivelse</label>
                     <br />
-                    <textarea onChange={this.onChangeDescription} className="form-control" id="description" placeholder="Job beskrivelse" required></textarea> 
-
+                    <textarea onChange={this.onChangeDescription} className="form-control text-input" id="description" placeholder="Job beskrivelse" required></textarea> 
+                    <br /><br />
                     <button onClick={this.handleInput}
-                            type="submit" id="submitButton"> Tilføj et job
+                            type="submit" class="newjob-btn" id="submitButton"> Tilføj et job
                     </button>
                     <p className="message text-danger">{this.state.message}</p>   
                 </form>
+                <b><Link to={'/'}>Gå til forsiden</Link></b>
             </div>
         );
     }

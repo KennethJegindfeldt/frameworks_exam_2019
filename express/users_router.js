@@ -50,7 +50,7 @@ module.exports = (users) => {
                     admin: false
                 };
                 const token = jwt.sign(payload, process.env.JWT_SECRET, {
-                    expiresIn: '1h'
+                    expiresIn: '10h'
                 });
                 console.log("New User has been added" + newQuestion);
             })

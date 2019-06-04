@@ -6,15 +6,18 @@ class JobList extends Component {
     render() {
         let jobList = [];
 
-        this.props.qas.forEach((elm) => {
-            jobList.push(
+        this.props.jobList.forEach((elm) => {
+            jobList .push(
                 <div class="job-div">
                     <li key={elm._id}>
                         <h3>{elm.jobtitle}</h3>
-                        <p>{elm.category}</p>
-                        <p>{elm.area}</p>
-                        <p>{elm.description}</p>
-                    <Link to={`/jobs/${elm._id}`}>Se job</Link>
+                        <b>Område:</b><p>{elm.jobarea}</p>
+                        <b>Kategori:</b><p>{elm.jobcategory}</p>
+                        <b>Virksomhed:</b><p>{elm.company}</p>
+                        <b>Email:</b><p><a href='#'>{elm.email}</a></p>
+                        <b>Jobbeskrivelse:</b><p>{elm.description}</p>
+                    <Link to={`jobs/${elm._id}`}>Læs mere om jobbet her</Link>
+                    <hr />
                     </li>
                 </div>)
         });
@@ -22,7 +25,7 @@ class JobList extends Component {
         return (
             <div class="job-div-list">
                 <h3>{this.props.header}</h3>
-                <ul>
+                <ul class="job-list-nav">
                     {jobList}
                 </ul>
             </div>

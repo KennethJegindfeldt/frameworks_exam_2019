@@ -10,9 +10,6 @@ var mongoose = require('mongoose')
 app.use(express.static(path.join(__dirname, '../build')));
 app.use(bodyParser.json());                 // Make sure all json data is parsed
 
-
-
-
 /****** Configuration *****/
 const port = (process.env.PORT || 9090);
 console.log(process.env.JWT_SECRET)
@@ -41,7 +38,8 @@ let openPaths = [
     '/api/users/create',
     '/api/jobs',
     '/api/newArea',
-    '/api/newCategory'
+    '/api/newJob',
+    '/api/newCategory',
 ];
 
 /****** Validate the user using authentication ******/
@@ -104,23 +102,25 @@ app.use((req, res, next) => {
 /****** Schemas - Database *****/
 
 var areaSchema = new mongoose.Schema ({
-    area: String
+    area: Array
 })
 
 var categorySchema = new mongoose.Schema ({
-    category: String
+    category: Array
 })
 
 var jobSchema = new mongoose.Schema ({
     jobtitle: String,
     jobcategory: String,
     jobarea: String,
-    description: String
+    description: String,
+    company: String,
+    email: String
 })
 
 var areas = mongoose.model('area', areaSchema);
 var categories = mongoose.model('category', categorySchema);
-var jobs = mongoose.model('jobs', jobSchema);
+var jobs = mongoose.model('job', jobSchema);
 
 
 // -------- ADD NEW JOB

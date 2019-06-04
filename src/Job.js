@@ -20,9 +20,11 @@ class Job extends Component {
             <div>
             <div class="job-div">
                 <h3>{job.jobtitle}</h3>
-                <p>{job.category}</p>
-                <p>{job.area}</p>
-                <p>{job.description}</p>
+                <b>Område:</b> <p>{job.jobarea}</p>
+                <b>Kategori:</b><p>{job.jobcategory}</p>
+                <b>Jobbeskrivelse:</b><p>{job.description}</p>
+                <b>Kontakt:</b><p>{job.email}</p>
+                <b>Virksomhed:</b><p>{job.company}</p>
                 <b><Link to={'/'}>Gå til forsiden</Link></b>
             </div>          
             </div>
