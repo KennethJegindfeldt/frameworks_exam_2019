@@ -9,9 +9,8 @@ class AreaList extends Component {
         this.props.areaList.forEach((elm) => {
             areaList .push(
                 <div class="job-div">
-                    <li key={elm._id}>
-                        <h3>{elm.area}</h3>
-                    <Link to={`/jobs/${elm._id}`}>Se job i område</Link>
+                    <li key={elm._id}>                    
+                    <h3> <Link to={`/jobs/${elm._id}`}>{elm.area}</Link></h3>
                     <hr />
                     </li>
                 </div>)

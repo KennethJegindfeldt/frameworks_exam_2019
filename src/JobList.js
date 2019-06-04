@@ -4,10 +4,29 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 class JobList extends Component {
 
     render() {
-        let jobList = [];
+        let jobListen = this.props.jobList;
+        let sortlist = jobListen.filter ((elm => {
+            let category = this.props.match.params.category === elm.jobcategory
+            return (category)
+   
+        }))
 
-        this.props.jobList.forEach((elm) => {
-            jobList .push(
+       /* let arealisten = this.props.areaList;
+                let arealist = arealisten.filter ((elm => {
+                let area = this.props.match.params.area === elm.jobarea
+                return(area)
+        }))
+
+        */
+
+
+
+        
+        console.log(this.props.match.params.category)        
+        let liste = [];
+
+        sortlist.forEach((elm) => {
+            liste .push(
                 <div class="job-div">
                     <li key={elm._id}>
                         <h3>{elm.jobtitle}</h3>
@@ -16,7 +35,7 @@ class JobList extends Component {
                         <b>Virksomhed:</b><p>{elm.company}</p>
                         <b>Email:</b><p><a href='#'>{elm.email}</a></p>
                         <b>Jobbeskrivelse:</b><p>{elm.description}</p>
-                    <Link to={`jobs/${elm._id}`}>Læs mere om jobbet her</Link>
+                    <Link to={`${elm.category}/${elm._id}`}>Læs mere om jobbet her</Link>
                     <hr />
                     </li>
                 </div>)
@@ -26,8 +45,15 @@ class JobList extends Component {
             <div class="job-div-list">
                 <h3>{this.props.header}</h3>
                 <ul class="job-list-nav">
-                    {jobList}
+                    {liste}
                 </ul>
+
+                <div class="back-to-front">
+                    <button>
+                        <a href="/">Tilbage til forsiden</a>
+                    </button>
+                </div>
+                
             </div>
 
         );

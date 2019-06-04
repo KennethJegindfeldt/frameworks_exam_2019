@@ -10,8 +10,7 @@ class CategoryList extends Component {
             categoryList .push(
                 <div class="job-div">
                     <li key={elm._id}>
-                        <h3>{elm.category}</h3>
-                    <Link to={`/jobs/${elm.category}`}>Se områder</Link>
+                    <h3><Link to={`/jobs/${elm.category}`}>{elm.category}</Link></h3>
                     <hr />
                     </li>
                 </div>)

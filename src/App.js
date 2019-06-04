@@ -151,12 +151,6 @@ getAreaFromId(id) {
     return this.state.areaList.find((elm) => elm._id === id);
 }
 
- // GET Area FROM ID
-getJobByCategory(jobcategory) {
-    return this.state.jobList.filter((elm) => elm.jobcategory.includes(jobcategory))
-}
-
-
 // Logout
   handleLogout(event) {
     this.Auth.logout()
@@ -185,10 +179,18 @@ getJobByCategory(jobcategory) {
                         />
 
 
-                <Route exact path={'/jobs'}
+                <Route exact path={'/jobs/:category'}
                                render={(props) =>
                                 <React.Fragment>
-                                   <JobList {...props} jobList={this.state.jobList}/>
+                                   <JobList {...props} category={props.match.params.jobcategory} jobList={this.state.jobList}/>
+                                </React.Fragment>}
+                        />
+
+
+                <Route exact path={'/area'}
+                               render={(props) =>
+                                <React.Fragment>
+                                   <AreaList {...props} areaList={this.state.areaList}/>
                                 </React.Fragment>}
                         />
                         
@@ -206,7 +208,7 @@ getJobByCategory(jobcategory) {
 
                 
 
-                <Route exact path={'/jobs/:id'}
+                <Route exact path={'/jobs/:category/:id'}
                                render={(props) =>
                                    <Job {...props}
                                jobs={this.getJobFromId(props.match.params.id) }  />
@@ -214,14 +216,7 @@ getJobByCategory(jobcategory) {
                                }
                         />
 
-                <Route exact path={'/jobs/:category'}
-                               render={(props) =>
-                                <React.Fragment>
-                                   <AreaList {...props} areaList={this.state.areaList}/>
-                                </React.Fragment>}
-                        />
         
-
                 <Route exact path={'/category/:id'}
                                render={(props) =>
                                    <Category {...props}

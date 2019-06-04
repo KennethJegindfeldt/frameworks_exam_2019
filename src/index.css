@@ -96,7 +96,7 @@ padding: 2% 0;
 }
 
 .newjob-btn:hover {
-  background-color: #eb8518; /* Green */
+  background-color: #eb8518; 
   color: white;
 }
 
@@ -113,3 +113,29 @@ select {
   width: 25%;
   height: 30px;
 }
+
+.back-to-front {
+  display: block;
+  height: 100px;
+  width: 100%;
+  background: darkgrey;
+}
+
+.back-to-front button {
+width: 20%;
+height: 30px;
+margin: 0 40%;
+border: none;
+background-color: #003269; /* Green */
+margin-top: 35px;
+}
+
+
+.back-to-front button:hover {
+  background: #4CAF50;
+  }
+.back-to-front button a {
+  color: white;
+  text-decoration: none;
+  }
+

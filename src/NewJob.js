@@ -116,6 +116,7 @@ class NewJob extends Component {
                     <label>Kategori</label>
                     <br />
                     <select onChange={this.onChangeCategory}>
+                    <option value="" selected disabled hidden>Vælg Kategori</option>
                         {cat}
                     </select>
                     <br />  <br />
@@ -130,6 +131,7 @@ class NewJob extends Component {
                     <label>Område</label>
                     <br />  
                     <select onChange={this.onChangeArea}>
+                    <option value="" selected disabled hidden>Vælg Område</option>
                         {area}
                     </select>
                     <br /><br />
