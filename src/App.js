@@ -8,6 +8,7 @@ import NewJob from './NewJob';
 import Job from './Job';
 import Category from './Job';
 import Area from './Area';
+import Login from './Login'
 
 // Lister
 import CategoryList from './CategoryList';
