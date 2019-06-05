@@ -8,7 +8,7 @@ import NewJob from './NewJob';
 import Job from './Job';
 import Category from './Job';
 import Area from './Area';
-import Login from './Login';
+
 
 // Lister
 import CategoryList from './CategoryList';
@@ -23,9 +23,6 @@ class App extends Component {
   constructor(props) {
       super(props);
       
-      this.Auth = new AuthService(`${this.api_url}/users/authenticate`);
-
-      // TODO: Move this data to the server
       this.state = {
           jobList: [],
           categoryList: [],
@@ -33,12 +30,12 @@ class App extends Component {
           loggedIn: false,
       };
 
-      this.handleLogout = this.handleLogout.bind(this)
+      
       this.getJobs = this.getJobs.bind(this);
       this.addJob= this.addJob.bind(this);
       this.addCategory= this.addCategory.bind(this);
       this.addArea= this.addArea.bind(this);
-      this.loginToApp= this.loginToApp.bind(this);
+    
   }
 
 
@@ -152,7 +149,7 @@ getAreaFromId(id) {
 }
 
 // Logout
-  handleLogout(event) {
+/*  handleLogout(event) {
     this.Auth.logout()
 }
 
@@ -163,30 +160,25 @@ async loginToApp(username, password) {
         res: res.msg,
         username: username
     })
-}
+} */
 
 
 
   render() {
 
 
-    if (localStorage.getItem("token") === "undefined") {
-        return( <Login loginToApp={this.loginToApp} />  
-                  
-            )               
     
-    }
 
       return (
           
          <Router>
                 <div className="container">
-                    <div class="div-header">
-                        <h3>Velkommen til Job Index 2.0</h3>   
-                        <form>
-                            <button type="submit" class="logout" onClick={this.handleLogout}>Log ud</button>
-                        </form>  
-                    </div>
+                <div class="div-header">¨
+                    <button class="login-btn">
+                        <a href="/admin">Log ind</a>
+                    </button>
+                </div>
+                           
                 <Switch>
 
                 <Route exact path={'/'}
@@ -204,15 +196,6 @@ async loginToApp(username, password) {
                                 </React.Fragment>}
                         />
 
-
-                <Route exact path={'/area'}
-                               render={(props) =>
-                                <React.Fragment>
-                                   <AreaList {...props} areaList={this.state.areaList}/>
-                                </React.Fragment>}
-                        />
-                        
-
                 <Route exact path={'/admin'}
                                render={(props) =>
                                 <React.Fragment>
@@ -224,8 +207,14 @@ async loginToApp(username, password) {
                                 </React.Fragment>}
                         />
 
-                
-                
+                <Route exact path={'/area'}
+                               render={(props) =>
+                                <React.Fragment>
+                                   <AreaList {...props} areaList={this.state.areaList}/>
+                                </React.Fragment>}
+                        />
+                        
+       
                 <Route exact path={'/jobs/:category/:jobtitle/:id'}
                                render={(props) =>
                                    <Job {...props}

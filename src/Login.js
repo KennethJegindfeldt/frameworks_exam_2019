@@ -37,10 +37,6 @@ export default class Login extends Component {
         })
     }
 
-    /*handleLoginInput(event) {
-        this.Auth.login(this.state.username, this.state.password)
-    }*/
-
     handleLoginInput(event) {
         event.preventDefault()
         this.props.loginToApp(this.state.username, this.state.password)

@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import Login from './Login'
+import Login from './Login';
+import AuthService from './AuthService';
 
 
 class NewJob extends Component {
 
+    api_url = process.env.REACT_APP_API_URL;
+
     constructor(props) {
         super(props);
+
+        this.Auth = new AuthService(`${this.api_url}/users/authenticate`);
 
         this.state = {
             jobtitle: "",
@@ -30,9 +35,8 @@ class NewJob extends Component {
         this.handleInput = this.handleInput.bind(this);
 
         this.handleLogout = this.handleLogout.bind(this)
-        this.loginToApp = this.loginToApp.bind(this);
-
-        
+      this.loginToApp= this.loginToApp.bind(this);
+    
     }
 
     onChange(event) {
@@ -82,8 +86,8 @@ class NewJob extends Component {
         this.props.addJob(this.state.jobtitle, this.state.jobcategory, this.state.jobarea, this.state.description, this.state.company, this.state.email);
     }
 
-    
-// Logout
+
+    // Logout
   handleLogout(event) {
     this.Auth.logout()
 }
@@ -97,11 +101,11 @@ async loginToApp(username, password) {
     })
 }
 
-    
 
 
     render() {
 
+        
         let cat = [];
         this.props.cat.forEach( elm => {
             cat.push(<option value={elm.category}>{elm.category}</option>)
@@ -115,18 +119,24 @@ async loginToApp(username, password) {
         })
         console.log(this.props.area)
 
-       if (localStorage.getItem("token") === "undefined") {
-        return( <Login loginToApp={this.loginToApp} />  
-                  
-            )               
-    
-    }
 
+        if (localStorage.getItem("token") === "undefined") {
+            return( <Login loginToApp={this.loginToApp} />  
+                      
+                )               
+        
+        }
+
+       
         return (
 
-            
+                   
+            <div className="newjob-div">   
+                <h3>Velkommen til Job Index 2.0</h3>   
+                    <form>
+                        <button type="submit" class="logout" onClick={this.handleLogout}>Log ud</button>
+                    </form> 
 
-            <div className="newjob-div">            
             <h2>Tilføj et nyt jobopslag</h2>
                 <form>
                     <label>Jobtitel</label>

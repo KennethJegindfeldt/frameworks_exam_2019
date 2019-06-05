@@ -37,12 +37,8 @@ let openPaths = [
     '/api/users/authenticate',
     '/api/users/create',
     '/api/jobs',
-    '/api/newArea',
-    '/api/newJob',
-    '/api/newCategory',
     '/api/areas',
     '/api/category',
-    '/admin'
 ];
 
 /****** Validate the user using authentication ******/
