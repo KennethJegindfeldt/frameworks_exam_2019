@@ -23,6 +23,9 @@ class App extends Component {
   constructor(props) {
       super(props);
       
+      this.Auth = new AuthService(`${this.api_url}/users/authenticate`);
+
+      // TODO: Move this data to the server
       this.state = {
           jobList: [],
           categoryList: [],
@@ -176,6 +179,9 @@ async loginToApp(username, password) {
                 <div class="div-header">¨
                     <button class="login-btn">
                         <a href="/admin">Log ind</a>
+                    </button>
+                    <button class="login-btn">
+                        <a href="/">Forsiden</a>
                     </button>
                 </div>
                            
