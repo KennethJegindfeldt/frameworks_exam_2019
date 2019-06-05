@@ -53,14 +53,16 @@ export default class Login extends Component {
         
         return (
             <div class="login-div">
-                <h1>Login her</h1>
+                <h1>Virksomheds Login</h1>
                 <form>
                     <label>Username</label>
-                    <input onChange={this.onChangeUsername} placeholder="Username..." />
-
+                    <br />
+                    <input onChange={this.onChangeUsername} type="text" placeholder="Username..." />
+                    <br />
                     <label>Password</label>
-                    <input onChange={this.onChangePassword} placeholder="Password..." />
-
+                    <br />
+                    <input onChange={this.onChangePassword} type="password" placeholder="Password..." />
+                    <br />
                     <button type="submit" onClick={this.handleLoginInput}>LOGIN</button>
                 </form>
             </div>

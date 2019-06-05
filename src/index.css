@@ -22,6 +22,10 @@ a {
   text-decoration: none;
   color:#003269;
 }
+
+a:hover {
+  color:#b41018;
+}
 /*----------------- Custom - CSS -----------------*/
 
 .div-header { 
@@ -161,12 +165,68 @@ margin-top: 35px;
 
 
   .login-div {
-    background: #003269;
-    margin:0 10%;
-    width: 80%;
+    border: 1px solid #b41018 ;
+    margin:0 25%;
+    width: 50%;
+    position: absolute;
+     top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
   }
- 
 
+  .login-div h1 {
+  padding: 5% 0 5% 0;
+ text-align: center;
+ font-size: 20px;
+ color: #003269 ;
+ font-weight: bold;
+  }
+
+  .login-div form {
+    width: 60%;
+    margin: 0 20%;
+  }
+
+  .login-div form input {
+    width: 100%;
+    margin: 2% 0;
+    height: 25px;
+    border: 3px #003269 solid;
+  }
+
+  .login-div form input[type=text] , .login-div form input[type=password] {
+font-size: 16px;
+padding: 1%;
+  }
+
+  .login-div form input[type=text]:focus , .login-div form input[type=password]:focus {
+    background-color: #003269;
+    color: white;
+  }
+
+  .login-div form label { 
+    color: #b41018; 
+    font-weight: bold; 
+    display: block; 
+    width: 150px; 
+    float: left; } 
+
+  .login-div form button {
+width: 40%;
+height: 50px;
+margin: 0 30%;
+border: none;
+background-color: #b41018; 
+margin-top: 35px;
+color: white;
+margin-bottom: 5%;
+border:none;
+  }
+
+  .login-div form button:hover {
+    background-color: #4CAF50; 
+    }
+ 
   h3 {
     font-size: 20px;
   }
