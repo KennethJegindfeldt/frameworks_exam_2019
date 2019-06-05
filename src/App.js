@@ -171,7 +171,7 @@ async loginToApp(username, password) {
 
 
     if (localStorage.getItem("token") === "undefined") {
-        return( <Login />  
+        return( <Login loginToApp={this.loginToApp} />  
                   
             )               
     
