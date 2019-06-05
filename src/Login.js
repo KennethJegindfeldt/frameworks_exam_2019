@@ -29,7 +29,7 @@ export default class Login extends Component {
         )
             .then(response => {
                 console.log("Authentication:", response.msg);
-                this.getCategories();
+                this.getJobs();
             })
             .catch(error => {
                 // TODO: Inform the user about the error
