@@ -56,7 +56,7 @@ class App extends Component {
 
       socket.on('new-data', (jobs) => {
           console.log(`server msg: ${jobs.msg}`);
-          this.getData();
+          this.getJobs();
       });
       this.getJobs();
       this.getCategories();
