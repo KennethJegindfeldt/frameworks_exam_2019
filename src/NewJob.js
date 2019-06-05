@@ -10,11 +10,13 @@ class NewJob extends Component {
 
         this.state = {
             jobtitle: "",
-            jobcategory: [],
-            jobarea: [],
+            jobcategory: "",
+            jobarea: "",
             description: "",
             company: "",
-            email: ""
+            email: "",
+            input: "",
+
         };
 
         this.onChange = this.onChange.bind(this);
