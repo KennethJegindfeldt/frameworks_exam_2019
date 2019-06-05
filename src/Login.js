@@ -52,7 +52,6 @@ export default class Login extends Component {
 
     handleLoginInput(event) {
         this.Auth.login(this.state.username, this.state.password)
-        this.props.setUsername(this.state.username)
     }
 
 

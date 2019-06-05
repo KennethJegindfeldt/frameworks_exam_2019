@@ -162,7 +162,7 @@ getAreaFromId(id) {
 
 
     if (localStorage.getItem("token") === "undefined") {
-        return( <Login setUsername={this.setUsername}/>  
+        return( <Login />  
                   
             )               
     
