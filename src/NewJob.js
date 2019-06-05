@@ -97,12 +97,7 @@ class NewJob extends Component {
         })
         console.log(this.props.area)
 
-        if (localStorage.getItem("token") === "undefined") {
-            return( <Login setUsername={this.setUsername}/>  
-                      
-                )               
-        
-        }
+       
 
         return (
 

@@ -159,6 +159,14 @@ getAreaFromId(id) {
 
   render() {
 
+
+    if (localStorage.getItem("token") === "undefined") {
+        return( <Login setUsername={this.setUsername}/>  
+                  
+            )               
+    
+    }
+
       return (
           
          <Router>
