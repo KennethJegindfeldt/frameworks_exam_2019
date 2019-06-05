@@ -35,7 +35,7 @@ class JobList extends Component {
                         <b>Virksomhed:</b><p>{elm.company}</p>
                         <b>Email:</b><p><a href='#'>{elm.email}</a></p>
                         <b>Jobbeskrivelse:</b><p>{elm.description}</p>
-                    <Link to={`${elm.category}/${elm._id}`}>Læs mere om jobbet her</Link>
+                    <Link to={`${elm.category}/${elm.jobtitle}/${elm._id}`}>Læs mere om jobbet her</Link>
                     <hr />
                     </li>
                 </div>)
@@ -43,6 +43,7 @@ class JobList extends Component {
 
         return (
             <div class="job-div-list">
+                <h1>Aktuelle jobs</h1>
                 <h3>{this.props.header}</h3>
                 <ul class="job-list-nav">
                     {liste}

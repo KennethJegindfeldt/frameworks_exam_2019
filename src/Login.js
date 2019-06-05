@@ -52,7 +52,7 @@ export default class Login extends Component {
 
         
         return (
-            <div>
+            <div class="login-div">
                 <h1>Login her</h1>
                 <form>
                     <label>Username</label>

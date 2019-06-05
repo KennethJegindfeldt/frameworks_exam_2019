@@ -18,6 +18,7 @@ class CategoryList extends Component {
 
         return (
             <div class="job-div-list">
+                <h1>Arbejdsområder</h1>
                 <h3>{this.props.header}</h3>
                 <ul class="job-list-nav">
                     {categoryList}

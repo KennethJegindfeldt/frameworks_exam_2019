@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom";
-
 
 class Job extends Component {
 
@@ -11,7 +9,7 @@ class Job extends Component {
         console.log(this.props)
         if(!job) return (
         <div>
-            Indlæser jobs ...
+            Indlæser det valgte job ...
         </div>)
      
 
@@ -19,7 +17,7 @@ class Job extends Component {
         return (
             <div>
             <div class="job-div">
-                <h3>{job.jobtitle}</h3>
+                <h1>{job.jobtitle}</h1>
                 <b>Område:</b> <p>{job.jobarea}</p>
                 <b>Kategori:</b><p>{job.jobcategory}</p>
                 <b>Virksomhed:</b><p>{job.company}</p>

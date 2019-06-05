@@ -182,7 +182,7 @@ async loginToApp(username, password) {
          <Router>
                 <div className="container">
                     <div class="div-header">
-                        <h3>Velkommen</h3>   
+                        <h3>Velkommen til Job Index 2.0</h3>   
                         <form>
                             <button type="submit" class="logout" onClick={this.handleLogout}>Log ud</button>
                         </form>  
@@ -225,8 +225,8 @@ async loginToApp(username, password) {
                         />
 
                 
-
-                <Route exact path={'/jobs/:category/:id'}
+                
+                <Route exact path={'/jobs/:category/:jobtitle/:id'}
                                render={(props) =>
                                    <Job {...props}
                                jobs={this.getJobFromId(props.match.params.id) }  />

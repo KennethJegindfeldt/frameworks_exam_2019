@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Login from './Login'
-import Select from "react-select";
+
 
 class NewJob extends Component {
 
@@ -28,6 +28,9 @@ class NewJob extends Component {
         this.onChangeCompany = this.onChangeCompany.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.handleInput = this.handleInput.bind(this);
+
+        this.handleLogout = this.handleLogout.bind(this)
+        this.loginToApp = this.loginToApp.bind(this);
 
         
     }
@@ -80,6 +83,21 @@ class NewJob extends Component {
     }
 
     
+// Logout
+  handleLogout(event) {
+    this.Auth.logout()
+}
+
+async loginToApp(username, password) {
+    console.log(username, password)
+    let res = await this.Auth.login(username, password)
+    this.setState({
+        res: res.msg,
+        username: username
+    })
+}
+
+    
 
 
     render() {
@@ -97,7 +115,12 @@ class NewJob extends Component {
         })
         console.log(this.props.area)
 
-       
+       if (localStorage.getItem("token") === "undefined") {
+        return( <Login loginToApp={this.loginToApp} />  
+                  
+            )               
+    
+    }
 
         return (
 

@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: beige;
 }
 
 code {
@@ -12,8 +13,15 @@ code {
     monospace;
 }
 
+b {
+  font-weight: bold;
+  font-size: 16px;
+}
 
-
+a {
+  text-decoration: none;
+  color:#003269;
+}
 /*----------------- Custom - CSS -----------------*/
 
 .div-header { 
@@ -29,7 +37,8 @@ padding: 2% 0;
 
 
 .job-div {
-  width:70%;
+  width:80%;
+  margin:1% 10%;
   background: beige;
   padding: 1% 3%;
 }
@@ -38,12 +47,23 @@ padding: 2% 0;
   background: beige;
 }
 
-.job-div h3 {
+.job-div h1 {
   color:#003269;
+  padding: 3% 0;
+  font-size: 30px;
 }
 
-.job-div-list h3 {
+.job-div h3 {
+  font-size: 22px; 
   color:#003269;
+  padding: 0 0 1% 0;
+}
+
+.job-div-list h1 {
+  color:#003269;
+  text-align: center;
+  padding: 3% 0;
+  font-size: 30px;
 }
 
 
@@ -139,3 +159,18 @@ margin-top: 35px;
   text-decoration: none;
   }
 
+
+  .login-div {
+    background: #003269;
+    margin:0 10%;
+    width: 80%;
+  }
+ 
+
+  h3 {
+    font-size: 20px;
+  }
+
+  p {
+    padding: 0 0 1% 0;
+  }
