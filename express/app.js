@@ -40,7 +40,6 @@ let openPaths = [
     '/api/newArea',
     '/api/newJob',
     '/api/newCategory',
-    'https://frameworks-exam-2k19.herokuapp.com/jobs'
 ];
 
 /****** Validate the user using authentication ******/
