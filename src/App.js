@@ -31,12 +31,10 @@ class App extends Component {
           categoryList: [],
           areaList: [],
           loggedIn: false,
-          username: ""
       };
 
       this.handleLogout = this.handleLogout.bind(this)
       this.getJobs = this.getJobs.bind(this);
-
       this.addJob= this.addJob.bind(this);
       this.addCategory= this.addCategory.bind(this);
       this.addArea= this.addArea.bind(this);
@@ -56,7 +54,7 @@ class App extends Component {
 
       socket.on('new-data', (jobs) => {
           console.log(`server msg: ${jobs.msg}`);
-          this.getJobs();
+          this.getData();
       });
       this.getJobs();
       this.getCategories();
@@ -66,7 +64,7 @@ class App extends Component {
 
 
   // Henter jobs
-  getJobs(){
+getJobs(){
     this.Auth.fetch(`${this.api_url}/jobs`)
         .then(data => this.setState({jobList: data}))
         .catch(err => console.error(err))

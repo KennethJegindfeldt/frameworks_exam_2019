@@ -43,7 +43,7 @@ let openPaths = [
     '/api/areas',
     '/api/category',
     '/admin', 
-    '/api/my_app'
+    '/api/my_app',
 ];
 
 /****** Validate the user using authentication ******/
