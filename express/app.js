@@ -42,8 +42,7 @@ let openPaths = [
     '/api/newCategory',
     '/api/areas',
     '/api/category',
-    '/admin', 
-    '/api/my_app',
+    '/admin'
 ];
 
 /****** Validate the user using authentication ******/

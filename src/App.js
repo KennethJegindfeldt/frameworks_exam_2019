@@ -8,7 +8,7 @@ import NewJob from './NewJob';
 import Job from './Job';
 import Category from './Job';
 import Area from './Area';
-import Login from './Login'
+import Login from './Login';
 
 // Lister
 import CategoryList from './CategoryList';
@@ -38,6 +38,7 @@ class App extends Component {
       this.addJob= this.addJob.bind(this);
       this.addCategory= this.addCategory.bind(this);
       this.addArea= this.addArea.bind(this);
+      this.loginToApp= this.loginToApp.bind(this);
   }
 
 
@@ -154,6 +155,16 @@ getAreaFromId(id) {
   handleLogout(event) {
     this.Auth.logout()
 }
+
+async loginToApp(username, password) {
+    console.log(username, password)
+    let res = await this.Auth.login(username, password)
+    this.setState({
+        res: res.msg,
+        username: username
+    })
+}
+
 
 
   render() {

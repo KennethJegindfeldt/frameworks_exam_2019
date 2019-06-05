@@ -23,22 +23,7 @@ export default class Login extends Component {
 
     componentDidMount() {
         console.log("App component has mounted");
-
-        // TODO: Move this to a Login component
-        this.Auth.login(
-            this.state.username,
-            this.state.password
-        )
-            .then(response => {
-                console.log("Authentication:", response.msg);
-                this.getJobs();
-            })
-            .catch(error => {
-                // TODO: Inform the user about the error
-                console.error("Error authenticating:", error);
-            });
     }
-
 
     onChangeUsername(event) {
         this.setState({
@@ -52,13 +37,20 @@ export default class Login extends Component {
         })
     }
 
-    handleLoginInput(event) {
+    /*handleLoginInput(event) {
         this.Auth.login(this.state.username, this.state.password)
+    }*/
+
+    handleLoginInput(event) {
+        event.preventDefault()
+        this.props.loginToApp(this.state.username, this.state.password)
+        console.log(this.state.username, this.state.password);
     }
 
 
-
     render() {
+
+        
         return (
             <div>
                 <h1>Login her</h1>
