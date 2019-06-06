@@ -12,8 +12,6 @@ class Job extends Component {
             Indlæser det valgte job ...
         </div>)
      
-
-
         return (
             <div>
             <div class="job-div">

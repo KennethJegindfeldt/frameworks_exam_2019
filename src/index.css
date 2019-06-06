@@ -19,6 +19,7 @@ b {
 }
 
 a {
+  font-weight: bold;
   text-decoration: none;
   color:#003269;
 }
@@ -70,6 +71,9 @@ padding: 2% 0;
   font-size: 30px;
 }
 
+.button a {
+  color: white;
+}
 
 .logout {
   -webkit-transition-duration: 0.4s; /* Safari */
