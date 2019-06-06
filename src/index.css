@@ -234,3 +234,7 @@ border:none;
   p {
     padding: 0 0 1% 0;
   }
+
+  strong h1 {
+    color: #b41018;
+  }

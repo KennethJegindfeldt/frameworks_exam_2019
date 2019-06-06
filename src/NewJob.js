@@ -21,7 +21,7 @@ class NewJob extends Component {
             company: "",
             email: "",
             input: "",
-
+            login: ""
         };
 
         this.onChange = this.onChange.bind(this);
@@ -33,9 +33,8 @@ class NewJob extends Component {
         this.onChangeCompany = this.onChangeCompany.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.handleInput = this.handleInput.bind(this);
-
         this.handleLogout = this.handleLogout.bind(this)
-      this.loginToApp= this.loginToApp.bind(this);
+        this.loginToApp= this.loginToApp.bind(this);
     
     }
 
@@ -88,9 +87,12 @@ class NewJob extends Component {
 
 
     // Logout
-  handleLogout(event) {
-    this.Auth.logout()
-}
+  handleLogout = async () => {
+        localStorage.removeItem('token');
+        this.setState({
+            login: false
+        })
+    }
 
 async loginToApp(username, password) {
     console.log(username, password)
@@ -104,13 +106,13 @@ async loginToApp(username, password) {
 
 
     render() {
-
-        
         let cat = [];
         this.props.cat.forEach( elm => {
             cat.push(<option value={elm.category}>{elm.category}</option>)
         })
-        console.log(this.props.cat)
+        console.log(localStorage.getItem("token"))
+        console.log(this.Auth.loggedIn())
+        console.log(this.Auth.getToken())
 
 
         let area = [];
@@ -120,22 +122,11 @@ async loginToApp(username, password) {
         console.log(this.props.area)
 
 
-        if (localStorage.getItem("token") === "undefined") {
-            return( <Login loginToApp={this.loginToApp} />  
-                      
-                )               
-        
-        }
-
-       
-        return (
-
-                   
+        if (this.Auth.loggedIn()) {
+        return (   
             <div className="newjob-div">   
                 <h3>Velkommen til Job Index 2.0</h3>   
-                    <form>
-                        <button type="submit" class="logout" onClick={this.handleLogout}>Log ud</button>
-                    </form> 
+                    <button type="button" class="logout" onClick={() => this.handleLogout()}>Log ud</button>
 
             <h2>Tilføj et nyt jobopslag</h2>
                 <form>
@@ -177,6 +168,9 @@ async loginToApp(username, password) {
                 <b><Link to={'/'}>Gå til forsiden</Link></b>
             </div>
         );
+        } else {
+            return( <Login loginToApp={this.loginToApp} />)               
+        }
     }
 }
 export default NewJob;

@@ -25,14 +25,19 @@ class AuthService {
     }
 
     loggedIn() {
-        if(this.getToken() === undefined) {
-            return false 
-        } else if (this.getToken() === null) {
-            return false
-        } else if (this.getToken() === '') {
+        let token = this.getToken();
+        if(token === undefined) {
             return false
         } else {
-            return true
+            if(token === null ) {
+                return false 
+            } else {
+                if(token === '') {
+                    return false
+                } else {
+                    return true
+                }
+            }
         }
     }
 
@@ -42,10 +47,6 @@ class AuthService {
 
     getToken() {
         return localStorage.getItem('token')
-    }
-
-    logout() {
-        localStorage.setItem('token', "undefined");
     }
 
     fetch(url, options) {

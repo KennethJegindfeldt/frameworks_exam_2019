@@ -24,6 +24,7 @@ class AreaList extends Component {
             <div class="job-div-list">
                 <h3>{this.props.header}</h3>
                 <ul class="job-list-nav">
+                    <h1>Alle - {cat} jobs på/i {area}</h1>
                     {jobs}
                 </ul>
             </div>
