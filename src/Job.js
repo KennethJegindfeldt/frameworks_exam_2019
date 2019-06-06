@@ -19,7 +19,7 @@ class Job extends Component {
                 <b>Område:</b> <p>{job.jobarea}</p>
                 <b>Kategori:</b><p>{job.jobcategory}</p>
                 <b>Virksomhed:</b><p>{job.company}</p>
-                <b>Kontakt:</b><p><a href='mailto'>{job.email}</a></p>
+                <b>Kontakt:</b><p><a href="#" >{job.email}</a></p>
                 <b>Jobbeskrivelse:</b><p>{job.description}</p>
             </div>  
             
