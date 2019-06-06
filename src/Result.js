@@ -4,14 +4,17 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 class AreaList extends Component {
 
     render() {
-        let areaList = [];
+        let jobs = [];
         let cat = this.props.category;
+        let area = this.props.area;
+        let job = this.props.jobs;
+        let array = job.filter((elm) => elm.jobcategory === cat && elm.jobarea === area)
 
-        this.props.areaList.forEach((elm) => {
-            areaList .push(
+        array.forEach((elm) => {
+            jobs.push(
                 <div class="job-div">
                     <li key={elm._id}>                    
-                    <h3> <Link to={`/result/${cat}/${elm.area}`}>{elm.area}</Link></h3>
+                    <h3> <Link to={`/jobs/${elm._id}`}>{elm.jobtitle}</Link></h3>
                     <hr />
                     </li>
                 </div>)
@@ -21,7 +24,7 @@ class AreaList extends Component {
             <div class="job-div-list">
                 <h3>{this.props.header}</h3>
                 <ul class="job-list-nav">
-                    {areaList}
+                    {jobs}
                 </ul>
             </div>
 

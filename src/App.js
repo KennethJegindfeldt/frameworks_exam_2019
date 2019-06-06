@@ -13,7 +13,7 @@ import Area from './Area';
 // Lister
 import CategoryList from './CategoryList';
 import AreaList from './AreaList';
-import JobList from './JobList';
+import Result from './Result';
 
 
 class App extends Component {
@@ -173,18 +173,14 @@ async loginToApp(username, password) {
     
 
       return (
-          
          <Router>
                 <div className="container">
-                <div class="div-header">¨
-                    <button class="login-btn">
-                        <a href="/admin">Log ind</a>
-                    </button>
-                    <button class="login-btn">
-                        <a href="/">Forsiden</a>
-                    </button>
-                </div>
-                           
+                    <div class="div-header">
+                        <button class="login-btn">
+                            <a href="/admin">Log ind</a>
+                        </button>
+                    </div>
+                            
                 <Switch>
 
                 <Route exact path={'/'}
@@ -194,40 +190,37 @@ async loginToApp(username, password) {
                                 </React.Fragment>}
                         />
 
-
-                <Route exact path={'/jobs/:category'}
+                <Route exact path={'/area/:category'}
                                render={(props) =>
                                 <React.Fragment>
-                                   <JobList {...props} category={props.match.params.jobcategory} jobList={this.state.jobList}/>
+                                   <AreaList {...props} areaList={this.state.areaList} category={props.match.params.category}/>
                                 </React.Fragment>}
-                        />
+                />
 
-                <Route exact path={'/admin'}
+                <Route exact path={'/result/:category/:area'}
                                render={(props) =>
                                 <React.Fragment>
-                                   <NewJob 
-                                   {...props} 
-                                   addJob={this.addJob} 
-                                   cat={this.state.categoryList}
-                                   area={this.state.areaList}></NewJob>
+                                   <Result {...props} jobs={this.state.jobList} area={props.match.params.area} category={props.match.params.category}/>
                                 </React.Fragment>}
-                        />
+                />
 
-                <Route exact path={'/area'}
-                               render={(props) =>
-                                <React.Fragment>
-                                   <AreaList {...props} areaList={this.state.areaList}/>
-                                </React.Fragment>}
-                        />
-                        
-       
-                <Route exact path={'/jobs/:category/:jobtitle/:id'}
+                <Route exact path={'/jobs/:id'}
                                render={(props) =>
                                    <Job {...props}
                                jobs={this.getJobFromId(props.match.params.id) }  />
-
                                }
-                        />
+                />
+
+                <Route exact path={'/admin'}
+                        render={(props) =>
+                        <React.Fragment>
+                            <NewJob 
+                            {...props} 
+                            addJob={this.addJob} 
+                            cat={this.state.categoryList}
+                            area={this.state.areaList}></NewJob>
+                        </React.Fragment>}
+                />
 
         
                 <Route exact path={'/category/:id'}

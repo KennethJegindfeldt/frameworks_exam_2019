@@ -7,10 +7,10 @@ class CategoryList extends Component {
         let categoryList = [];
 
         this.props.categoryList.forEach((elm) => {
-            categoryList .push(
+            categoryList.push(
                 <div class="job-div">
                     <li key={elm._id}>
-                    <h3><Link to={`/jobs/${elm.category}`}>{elm.category}</Link></h3>
+                    <h3><Link to={`/area/${elm.category}`}>{elm.category}</Link></h3>
                     <hr />
                     </li>
                 </div>)

@@ -25,7 +25,15 @@ class AuthService {
     }
 
     loggedIn() {
-        return (this.getToken() !== undefined);
+        if(this.getToken() === undefined) {
+            return false 
+        } else if (this.getToken() === null) {
+            return false
+        } else if (this.getToken() === '') {
+            return false
+        } else {
+            return true
+        }
     }
 
     setToken(token) {
