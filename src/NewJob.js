@@ -165,8 +165,13 @@ async loginToApp(username, password) {
                     </button>
                     <p className="message text-danger">{this.state.message}</p>   
                 </form>
-                <b><Link to={'/'}>Gå til forsiden</Link></b>
+                    <button class="back-btn">
+                        <a href="/">Tilbage til forsiden</a>
+                    </button>
+     
             </div>
+
+            
         );
         } else {
             return( <Login loginToApp={this.loginToApp} />)               
