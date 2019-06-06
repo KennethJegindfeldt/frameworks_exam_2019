@@ -177,7 +177,7 @@ async loginToApp(username, password) {
                 <div className="container">
                     <div class="div-header">
                         <button class="login-btn">
-                            <a href="/admin">Log ind</a>
+                            <a href="/admin">Opret jobopslag</a>
                         </button>
                     </div>
                             
