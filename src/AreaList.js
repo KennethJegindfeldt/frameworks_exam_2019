@@ -21,6 +21,7 @@ class AreaList extends Component {
             <div class="job-div-list">
                 <h3>{this.props.header}</h3>
                 <ul class="job-list-nav">
+                    <h1>Jobs inden for {cat} i </h1>
                     {areaList}
                 </ul>
             </div>
